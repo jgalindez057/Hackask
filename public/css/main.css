@@ -1,0 +1,26 @@
+
+.tabs-color{
+	background-color: #f6f5f3;	
+}
+
+.image{
+	padding-top:50px;
+	padding-bottom:50px;background:url(../img/team.jpg) no-repeat fixed;
+	background-size:cover;height:600px
+}
+.move-down{
+	margin-top:100px;
+	color:#fff
+}
+#coments{
+	padding:20px 0;
+	background-color:#f6f5f3;
+}
+
+.edit-hr {
+  margin-right: 315px;
+  margin-top: 150px;
+  width: 920px;
+  text-align: center;
+  border: 1px solid #939393;
+}

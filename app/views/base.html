@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/materialize.css">
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+
+<body>
+    <nav>
+        <div class="nav-wrapper container">
+            <a href="#!" class="brand-logo">Logo</a>
+                <!-- Dropdown Trigger -->
+             {% if (prove) %}
+                <ul class="right hide-on-med-and-down">
+                    <li><img src="{{ url_foto }}" alt=""></li>
+                    <li><a class="right" href="#!">{{ name }}</a></li>
+                    <li><a href="/logout">Logout</a></li>
+            </ul>
+            {% else %}
+            <ul class="right hide-on-med-and-down">
+                    <li><a href="/auth/facebook">Login with facebook</a></li>
+                    <li><a href="/singup">Registrarse</a></li>
+                     <li><a href="/singin">Iniciar sesion</a></li>
+             </ul>
+            {% endif %}
+        </div>
+    </nav>
+    {% block content %} 
+
+    {% endblock %}
+    <script src="/js/jquery-2.1.1.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/materialize.js"></script>
+    <script src="/js/smooth-scroll.js"></script>
+    {% block js %} 
+
+    {% endblock %}
+</body>
+
+</html>
