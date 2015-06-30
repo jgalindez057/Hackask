@@ -11,9 +11,9 @@
 <body>
     <nav>
         <div class="nav-wrapper container">
-            <a href="#!" class="brand-logo">Logo</a>
+            <a href="/" class="brand-logo">Logo</a>
                 <!-- Dropdown Trigger -->
-             {% if (prove) %}
+             {% if (user) %}
                 <ul class="right hide-on-med-and-down">
                     <li><img src="{{ url_foto }}" alt=""></li>
                     <li><a class="right" href="#!">{{ name }}</a></li>
@@ -21,7 +21,6 @@
             </ul>
             {% else %}
             <ul class="right hide-on-med-and-down">
-                    <li><a href="/auth/facebook">Login with facebook</a></li>
                     <li><a href="/singup">Registrarse</a></li>
                      <li><a href="/singin">Iniciar sesion</a></li>
              </ul>

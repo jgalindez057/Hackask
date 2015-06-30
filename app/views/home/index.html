@@ -29,22 +29,20 @@
                         <p>Pregunta lo que quieras!</p>
                         <br>
                         <div class="row">
-                            <form class="col s12">
+                            <form class="col s12" method='post' action="/save-question">
                                 <div class="row">
                                     <div class="input-field col s12">
-                                        <input id="last_name" type="text" class="validate">
+                                        <input id="last_name" name="title" type="text" class="validate">
                                         <label for="last_name">Titulo</label>
                                     </div>
                                     <div class="input-field col s12">
-                                        <textarea id="textarea1" class="materialize-textarea"></textarea>
-                                        <label for="textarea1">Contenido</label>
+                                        <textarea id="textarea1" name="content" class="materialize-textarea"></textarea>
+                                        <label for="textarea1" >Contenido</label>
                                     </div>
                                 </div>
+                                    <button type='submit' class="waves-effect waves-light btn">Agregar</button>
                             </form>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
                     </div>
                 </div>
             </div>
@@ -55,9 +53,9 @@
         <div class="row">
             <div class="col s8">
                 <ul class="tabs tabs-color">
-                    <li class="tab col s3"><a href="#test1">Test 1</a></li>
-                    <li class="tab col s3"><a class="active" href="#test2">Test 2</a></li>
-                    <li class="tab col s3"><a href="#test3">Test 3</a></li>
+                    <li class="tab col s3"><a href="#test1">Todos</a></li>
+                    <li class="tab col s3"><a class="active" href="#test2">Top 5</a></li>
+                    <li class="tab col s3"><a href="#test3">Favoritos</a></li>
                 </ul>
                 <br>
             </div>
@@ -74,8 +72,8 @@
                         <h5 class="valign"><a href="#">Nombre del usuario </a><small class="right">12 Minutes Ago</small></h5>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex pariatur animi, explicabo temporibus dignissimos, ea ipsum adipisci iure alias itaque nobis expedita</p>
                         <div class="right">
-                            <a class="waves-effect waves-light btn">Stuff</a>
-                            <a class="waves-effect waves-light btn">Stuff</a>
+                            <a class="waves-effect waves-light btn">Favorito</a>
+                            <a class="waves-effect waves-light btn">Me gusta</a>
                         </div>
                     </div>
                 </div>
@@ -91,8 +89,8 @@
                         <h5 class="valign"><a href="#">Nombre del usuario</a></h5>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex pariatur animi, explicabo temporibus dignissimos, ea ipsum adipisci iure alias itaque nobis expedita</p>
                         <div class="right">
-                            <a class="waves-effect waves-light btn">Stuff</a>
-                            <a class="waves-effect waves-light btn">Stuff</a>
+                            <a class="waves-effect waves-light btn">Favorito</a>
+                            <a class="waves-effect waves-light btn">Me gusta</a>
                         </div>
                     </div>
                 </div>
@@ -108,8 +106,8 @@
                         <h5 class="valign"><a href="#">Nombre del usuario</a></h5>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex pariatur animi, explicabo temporibus dignissimos, ea ipsum adipisci iure alias itaque nobis expedita</p>
                         <div class="right">
-                            <a class="waves-effect waves-light btn">Stuff</a>
-                            <a class="waves-effect waves-light btn">Stuff</a>
+                            <a class="waves-effect waves-light btn">Favorito</a>
+                            <a class="waves-effect waves-light btn">Me gusta</a>
                         </div>
                     </div>
                 </div>

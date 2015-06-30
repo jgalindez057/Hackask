@@ -1,20 +1,22 @@
-{% extends '../base.html' %} {% block content %}
+{% extends '../base.html' %} 
+
+{% block content %}
 <br>
 <br>
 <div class="container">
-    <div class="row">
-        <form class="col s6" method='POST'>
-            <div class="row">
+    <h2>    </h2>
+    <div class="row center-align">
+        <form class="col s6 offset-s3" method='POST' action="/singin">
                 <div class="input-field col s12">
-                    <input id="last_name" type="email" name='email' class="validate">
-                    <label for="last_name">Email</label>
+                    <input placeholder="Placeholder" id="last_name" type="email" name='email' class="validate">
+                    <label for="last_name">Email</label> <br>
                 </div>
                 <div class="input-field col s12">
-                    <input id="last_name" type="password" name='password' class="validate">
-                    <label for="last_name">Password</label>
+                    <input placeholder="Placeholder" id="password" type="password" name='password' class="validate">
+                    <label for="password">Password</label>
                 </div>
-                <button type='submit'>Iniciar sesion</button>
-            </div>
+                <button type='submit' class="waves-effect waves-light btn">Iniciar sesion</button> <br> <br>
+                <a href="/auth/facebook" class="waves-effect waves-light btn">Iniciar sesion con facebook</a>
         </form>
     </div>
 </div>

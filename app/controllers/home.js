@@ -1,4 +1,4 @@
-var User = require('../models/userjohn')
+var User = require('../models/user')
 
 var homeController = function(server) {
     console.log("Home controller Funcionando");
@@ -6,32 +6,49 @@ var homeController = function(server) {
     server.route("/")
         .get(function (petic, resp) {
             if (petic.user) {
-                var user = new User({
-                	id_network : petic.user.id,
-                    first_name : petic.user.name.givenName,
-                    last_name : petic.user.name.familyName,
-                    username : petic.user.displayName,
-                })
+                console.log("llego");
+                User.findOne({
+                    password : petic.user.id
+                }, function (err, user) {
+                    if (user) {
+                                            console.log(user)
+                        var name = petic.user._json.first_name;
+                        var lastname = petic.user._json.last_name;
+                        var url_foto = "http://graph.facebook.com/" + petic.user.id + "/picture";
+                        resp.render('home/index', {
+                            user: true,
+                            name: name + " " + lastname,
+                            url_foto: url_foto
+                        });
 
-                user.save(function(err) {
-                    if (err) {
-                        console.log("error");
-                        console.log(user)
-                        return;
+                    } else {
+                        var user = new User({
+                            first_name: petic.user.name.givenName,
+                            last_name: petic.user.name.familyName,
+                            displayName: petic.user.displayName,
+                            password: petic.user.id
+                        })
+
+                        user.save(function(err) {
+                            if (err) {
+                                console.log("Ya esta guardado esre");
+                                console.log(user)
+                                return;
+                            }
+                        });
+
+                        var name = petic.user._json.first_name;
+                        var lastname = petic.user._json.last_name;
+                        var url_foto = "http://graph.facebook.com/" + petic.user.id + "/picture";
+                        resp.render('home/index', {
+                            user: true,
+                            name: name + " " + lastname,
+                            url_foto: url_foto
+                        });
                     }
-                });
-
-                var name = petic.user._json.first_name;
-                var lastname = petic.user._json.last_name;
-                var url_foto = "http://graph.facebook.com/" + petic.user.id + "/picture";
-                resp.render('home/index', {
-                    prove: true,
-                    name: name + " " + lastname,
-                    url_foto: url_foto
-                });
-            } else {
-                resp.render('home/index');
-            }
+                })
+            } else
+                resp.render('home/index')
         });
 
 };

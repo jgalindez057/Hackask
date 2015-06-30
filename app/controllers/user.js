@@ -1,18 +1,13 @@
-var User = require('../models/userjohn')
+var User = require('../models/user')
 
 var userLogin = function(server) {
-
-    server.route("/logout/facebook")
-        .get(function (petic, resp) {
-            petic.logout();
-            resp.redirect('/');
-        });
 
     server.route("/logout")
         .get(function (petic, resp) {
             petic.logout();
             resp.redirect('/');
         });
+
 
     server.route("/singup")
         .get(function (petic, resp) {
@@ -22,21 +17,23 @@ var userLogin = function(server) {
             var user = new User({
                 first_name: petic.body.first_name,
                 last_name: petic.body.last_name,
-                username: petic.body.username,
+                displayName: petic.body.displayName,
                 email: petic.body.email,
                 password: petic.body.password
             });
 
-            user.save (function(err) {
+            user.save (function (err) {
                 if (err) {
-                    console.log("error");
+                    console.log(err);
                     console.log(petic.body)
+                resp.redirect("/singup");
                     return;
-                }
-            });
+                }else{
             resp.render('home/index', {
-                prove: true,
+                user: true,
                 name: petic.body.first_name + " " + petic.body.last_name
+            });
+                }
             });
         });
 
@@ -48,15 +45,13 @@ var userLogin = function(server) {
             User.findOne({
                 email: petic.body.email,
                 password: petic.body.password
-            }, function(err, user) {
+            }, function (err, user) {
                 if (user) {
+                    console.log(user)
                 	console.log("paso");
-                    resp.render('home/index', {
-                        prove: true,
-                        name: user.username
-                    });
+                    resp.redirect('/');
                 }else{
-                	resp.render("/singin");
+                	resp.redirect("/" + user.displayName);
                 }
             })
         });

@@ -45,6 +45,7 @@ server.use(express.static('./public'));
 // Server para los controladores
 require('./app/controllers/home')(server);
 require('./app/controllers/user')(server);
+require('./app/controllers/discuss')(server);
 
 // Server para login de facebook
 require('./app/connections/facebook')(server);
