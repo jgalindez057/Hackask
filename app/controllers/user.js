@@ -1,19 +1,20 @@
-var User = require('../models/user')
+var User = require('../models/user');
+var passport = require('passport');
 
 var userLogin = function(server) {
 
     server.route("/logout")
-        .get(function (petic, resp) {
+        .get(function(petic, resp) {
             petic.logout();
             resp.redirect('/');
         });
 
 
     server.route("/singup")
-        .get(function (petic, resp) {
+        .get(function(petic, resp) {
             resp.render('user/singup');
         })
-        .post(function (petic, resp) {
+        .post(function(petic, resp) {
             var user = new User({
                 first_name: petic.body.first_name,
                 last_name: petic.body.last_name,
@@ -22,39 +23,32 @@ var userLogin = function(server) {
                 password: petic.body.password
             });
 
-            user.save (function (err) {
+            user.save(function(err) {
                 if (err) {
                     console.log(err);
                     console.log(petic.body)
-                resp.redirect("/singup");
+                    resp.redirect("/singup");
                     return;
-                }else{
-            resp.render('home/index', {
-                user: true,
-                name: petic.body.first_name + " " + petic.body.last_name
-            });
+                } else {
+                    resp.render('home/index', {
+                        user: true,
+                        name: petic.body.first_name + " " + petic.body.last_name
+                    });
                 }
             });
         });
 
-    server.route("/singin")
-        .get(function (petic, resp) {
-            resp.render('user/singin');
+    server.route("/login")
+        .get(function(petic, resp) {
+            resp.render('user/login');
         })
-        .post(function (petic, resp) {
-            User.findOne({
-                email: petic.body.email,
-                password: petic.body.password
-            }, function (err, user) {
-                if (user) {
-                    console.log(user)
-                	console.log("paso");
-                    resp.redirect('/');
-                }else{
-                	resp.redirect("/" + user.displayName);
-                }
+        .post(
+            passport.authenticate('local', {
+                successRedirect: '/',
+                failureRedirect: '/login',
+                failureFlash: true
             })
-        });
+        );
 };
 
 module.exports = userLogin;
