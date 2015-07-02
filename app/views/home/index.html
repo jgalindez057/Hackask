@@ -1,6 +1,4 @@
-{% extends '../base.html' %} 
-
-{% block content %}
+{% extends '../base.html' %} {% block content %}
 <header>
     <div class="image">
         <div class="container">
@@ -21,11 +19,11 @@
             <div class="cols 12 center-align">
                 <h4>Sistema de discuciones para programadores</h4>
                 <!-- Modal Trigger -->
-                <a class="modal-trigger waves-effect waves-light btn" href="#modal1">Formula tu pregunta.</a>
+                <a class="modal-trigger waves-effect waves-light btn" href="#modal1">Formula tu pregunta</a>
                 <!-- Modal Structure -->
                 <div id="modal1" class="modal modal-fixed-footer">
                     <div class="modal-content">
-                        <h4>Pregunta</h4>
+                        <h4>Alguna duda?</h4>
                         <p>Pregunta lo que quieras!</p>
                         <br>
                         <div class="row">
@@ -37,10 +35,10 @@
                                     </div>
                                     <div class="input-field col s12">
                                         <textarea id="textarea1" name="content" class="materialize-textarea"></textarea>
-                                        <label for="textarea1" >Contenido</label>
+                                        <label for="textarea1">Contenido</label>
                                     </div>
                                 </div>
-                                    <button type='submit' class="waves-effect waves-light btn">Agregar</button>
+                                <button type='submit' class="waves-effect waves-light btn">Preguntar</button>
                             </form>
                         </div>
                     </div>
@@ -51,10 +49,10 @@
     <br>
     <div class="container">
         <div class="row">
-            <div class="col s8">
+            <div class="col s8 offset-s2">
                 <ul class="tabs tabs-color">
-                    <li class="tab col s3"><a href="#test1">Todos</a></li>
-                    <li class="tab col s3"><a class="active" href="#test2">Top 5</a></li>
+                    <li class="tab col s3"><a class="active" href="#test1">Todos</a></li>
+                    <li class="tab col s3"><a href="#test2">Top 5</a></li>
                     <li class="tab col s3"><a href="#test3">Favoritos</a></li>
                 </ul>
                 <br>
@@ -62,57 +60,31 @@
         </div>
         <div class="row">
             <div id="test1">
-                <div class="valign-wrapper col s12">
-                    <div class="col s2">
-                        <a href="" class="left-aling ">
-                            <img class="circle img" src="/img/user3-128x128.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="col s8">
-                        <h5 class="valign"><a href="#">Nombre del usuario </a><small class="right">12 Minutes Ago</small></h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex pariatur animi, explicabo temporibus dignissimos, ea ipsum adipisci iure alias itaque nobis expedita</p>
-                        <div class="right">
-                            <a class="waves-effect waves-light btn">Favorito</a>
-                            <a class="waves-effect waves-light btn">Me gusta</a>
-                        </div>
-                    </div>
+                <div class="valign-wrapper col s10 offset-s1">
+                    <table class="bordered">
+                        <thead>
+                            <tr>
+                                <th data-field="id">Usuario</th>
+                                <th data-field="name">Tema</th>
+                                <th data-field="price">Categoria</th>
+                                <th data-field="price">Fecha</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                    {% for question in questions %}
+                            <tr>
+                                <td>
+                                    <img class="circle img" src="{{question.user.url_foto}}" alt="">
+                                    <a class="vertical-m" href="#">{{question.user.displayName}} </a>
+                                </td>
+                                <td><a href="question/{{question.slug}}">{{question.title}}</a></td>
+                                <td></td>
+                                <td>{{question.created|date('Y-m-d')}}</td>
+                            </tr>
+                    {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
-                <br>
-                <hr class="edit-hr">
-                <div class="valign-wrapper col s12">
-                    <div class="col s2">
-                        <a href="" class="left-aling ">
-                            <img class="circle img" src="/img/user3-128x128.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="col s8">
-                        <h5 class="valign"><a href="#">Nombre del usuario</a></h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex pariatur animi, explicabo temporibus dignissimos, ea ipsum adipisci iure alias itaque nobis expedita</p>
-                        <div class="right">
-                            <a class="waves-effect waves-light btn">Favorito</a>
-                            <a class="waves-effect waves-light btn">Me gusta</a>
-                        </div>
-                    </div>
-                </div>
-                <br>
-                <hr class="edit-hr">
-                <div class="valign-wrapper col s12">
-                    <div class="col s2">
-                        <a href="" class="left-aling ">
-                            <img class="circle img" src="/img/user3-128x128.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="col s8">
-                        <h5 class="valign"><a href="#">Nombre del usuario</a></h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex pariatur animi, explicabo temporibus dignissimos, ea ipsum adipisci iure alias itaque nobis expedita</p>
-                        <div class="right">
-                            <a class="waves-effect waves-light btn">Favorito</a>
-                            <a class="waves-effect waves-light btn">Me gusta</a>
-                        </div>
-                    </div>
-                </div>
-                <br>
-                <hr class="edit-hr">
             </div>
             <div id="test2" class="col s12">Test 2 funciona</div>
             <div id="test3" class="col s12">Test 3</div>

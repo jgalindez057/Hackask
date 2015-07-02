@@ -12,6 +12,13 @@ var askSchema = new Schema({
     content: {
         type: String,
         require: true
+    },
+    slug:{
+        type: String
+    },
+    created:{
+        type: Date,
+        default: Date.now
     }
 });
 

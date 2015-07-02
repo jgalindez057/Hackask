@@ -28,6 +28,9 @@ var userSchema = new Schema({
         required: true,
         unique : true,
         sparse: true
+    },
+    url_foto:{
+        type: String
     }
 });
 

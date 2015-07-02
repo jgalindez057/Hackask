@@ -11,12 +11,12 @@
 <body>
     <nav>
         <div class="nav-wrapper container">
-            <a href="/" class="brand-logo">Logo</a>
+            <a href="/" class="brand-logo">Hackask</a>
                 <!-- Dropdown Trigger -->
              {% if (user) %}
                 <ul class="right hide-on-med-and-down">
-                    <li><img src="{{ url_foto }}" alt=""></li>
-                    <li><a class="right" href="#!">{{ name }}</a></li>
+                <img class="left circle edit-photo" src="{{ url_foto }}" alt="">
+                    <li><a href="#!">{{ name }}</a></li>
                     <li><a href="/logout">Logout</a></li>
             </ul>
             {% else %}
