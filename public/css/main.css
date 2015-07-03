@@ -22,13 +22,19 @@
 	background-color:#f6f5f3;
 }
 
-.vertical-m{
+.vertical-m2{
 	  padding-left: 10px;
   	vertical-align: 40px;
 }
 
+.vertical-m{
+	  padding-left: 10px;
+  	vertical-align: 20px;
+}
+
 .border-b{
-	padding-bottom: 30px;
+	padding-top: 20px;
+	padding-bottom: 15px;
 	border-bottom: 3px solid #ebebeb;
 }
 
