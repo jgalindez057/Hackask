@@ -20,45 +20,32 @@
             <div id="modal1" class="modal bottom-sheet">
                 <div class="modal-content">
                     <h4>Modal Answer</h4>
-                    <form>
+                    <form method='POST' action="/save-answer/{{question.slug}}">
                         <div class="row">
                             <div class="input-field col s8">
-                                <textarea id="textarea1" class="materialize-textarea"></textarea>
+                                <textarea id="textarea1" name="content" class="materialize-textarea"></textarea>
                                 <label for="textarea1">Textarea</label>
                             </div>
                         </div>
-                        <div class="modal-footer">
-                            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-                        </div>
+                        <button type="submit" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</button>
                     </form>
                 </div>
             </div>
+            {% for answer in answers%}
             <div class="answer border-b">
                 <div class="row">
                     <div class="col s1">
-                        <img class="circle" src="/img/user3-128x128.jpg" height="60" width="60" alt="">
+                        <img class="circle" src="{{answer.user.url_foto}}" height="60" width="60" alt="">
                     </div>
                     <div class="col s11">
-                        <a href="#" class="vertical-m2">Erika Salas</a>
+                        <a href="#" class="vertical-m2">{{answer.user.displayName}}</a>
                         <p class="edit-p">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam esse alias aperiam ipsam blanditiis quam voluptatem tenetur odit iste officia! Recusandae assumenda atque dicta iste in nihil natus quod nesciunt, Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit dolorum eius quisquam commodi ea.
+                            {{answer.content}}
                         </p>
                     </div>
                 </div>
             </div>
-            <div class="answer border-b">
-                <div class="row">
-                    <div class="col s1">
-                        <img class="circle" src="/img/user3-128x128.jpg" height="60" width="60" alt="">
-                    </div>
-                    <div class="col s11">
-                        <a href="#" class="vertical-m2">Erika Salas</a>
-                        <p class="edit-p">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam esse alias aperiam ipsam blanditiis quam voluptatem tenetur odit iste officia! Recusandae assumenda atque dicta iste in nihil natus quod nesciunt, Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit dolorum eius quisquam commodi ea.
-                        </p>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </div>

@@ -1,4 +1,6 @@
 var Question = require('../models/question');
+var Answer = require('../models/answer');
+var getQuestion = require('../middlewares/getquestion');
 var loggedUser = require('../middlewares/loginUser');
 var logged = require('../middlewares/logged');
 var getUser = require('../middlewares/getuser');
@@ -8,7 +10,7 @@ var disscuss = function(server) {
 
     server.route('/save-question')
 
-    .post(loggedUser, getUser, function (petic, resp) {
+    .post(loggedUser, getUser, function(petic, resp) {
         var question = new Question({
             user: petic.user,
             title: petic.body.title,
@@ -16,14 +18,14 @@ var disscuss = function(server) {
             slug: slug(petic.body.title)
         });
 
-        question.save(function(err) {
+        question.save (function(err) {
             if (err) {
                 console.log("error");
                 console.log(petic.body);
                 return;
             };
         });
-        resp.redirect("/");
+        resp.render("/");
     });
 
     server.route('/question/:slug')
@@ -34,18 +36,47 @@ var disscuss = function(server) {
                 slug: petic.params.slug
             })
             .populate('user')
+            .exec(function (err, question) {
+                Answer
+                    .find({
+                        question: question
+                    })
+                    .populate('user')
+                    .sort('-created')
+                    .exec(function (err, answers) {
+                        resp.render('discuss/answers', {
+                            answers : answers,
+                            question: question,
+                            user: petic.user,
+                            name: petic.name + " " + petic.lastname,
+                            url_foto: petic.url_foto
+                        });
+                    })
+            })
+    });
+
+    server.route('/save-answer/:slug')
+
+    .post(loggedUser, getUser, function(petic, resp) {
+        Question
+            .findOne({
+                slug: petic.params.slug
+            })
+            .populate('user')
             .exec(function(err, question) {
-                if (err) {
-                    console.log("error a traer la pregunta");
-                    resp.redirect('/err');
-                } else {
-                    resp.render('discuss/answers', {
-                        question: question,
-                        user: petic.user,
-                        name: petic.name + " " + petic.lastname,
-                        url_foto: petic.url_foto
-                    });
-                }
+                var answer = new Answer({
+                    user: petic.user,
+                    question: question,
+                    content: petic.body.content
+                });
+                answer.save(function(err) {
+                    if (err) {
+                        console.log('error al guardar la respuesta');
+                        return;
+                    }
+                });
+                console.log(petic.params)
+                resp.redirect('/question/' + petic.params.slug);
             })
     })
 }

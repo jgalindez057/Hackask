@@ -7,7 +7,7 @@ var getUser = function (petic, resp, next){
 			next();
 		}else{
 			console.log(err);
-			resp.redirect('/error');
+			resp.redirect('/error user');
 		}
 	});
 };
