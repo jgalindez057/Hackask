@@ -1,11 +1,12 @@
 var User = require('../models/user');
 var getQuestions = require('../middlewares/getquestions');
+var getCategories = require('../middlewares/getcategories');
 
 var homeController = function(server) {
     console.log("Home controller Funcionando");
 
     server.route("/")
-        .get(getQuestions, function (petic, resp) {
+        .get(getQuestions, getCategories, function (petic, resp) {
             if (petic.user) {
                 console.log("llego");
                 User.findOne({
@@ -17,6 +18,7 @@ var homeController = function(server) {
                         var lastname = petic.user._json.last_name;
                         var url_foto = "http://graph.facebook.com/" + petic.user.id + "/picture";
                         resp.render('home/index', {
+                            categories : petic.category,
                             user: true,
                             name: name + " " + lastname,
                             url_foto: url_foto,
@@ -44,6 +46,7 @@ var homeController = function(server) {
                         var lastname = petic.user._json.last_name;
                         var url_foto = "http://graph.facebook.com/" + petic.user.id + "/picture";
                         resp.render('home/index', {
+                            categories : petic.category,
                             user: true,
                             name: name + " " + lastname,
                             url_foto: url_foto,
@@ -53,6 +56,7 @@ var homeController = function(server) {
                 })
             } else
                 resp.render('home/index', {
+                    categories : petic.category,
                     questions : resp.questions
                 })
         });

@@ -10,12 +10,13 @@ var disscuss = function(server) {
 
     server.route('/save-question')
 
-    .post(loggedUser, getUser, function(petic, resp) {
+    .post(loggedUser, getUser, function (petic, resp) {
         var question = new Question({
             user: petic.user,
             title: petic.body.title,
             content: petic.body.content,
-            slug: slug(petic.body.title)
+            slug: slug(petic.body.title),
+            category: petic.body.selectpicker
         });
 
         question.save (function(err) {
@@ -25,7 +26,7 @@ var disscuss = function(server) {
                 return;
             };
         });
-        resp.render("/");
+        resp.redirect("/");
     });
 
     server.route('/question/:slug')
@@ -35,8 +36,10 @@ var disscuss = function(server) {
             .findOne({
                 slug: petic.params.slug
             })
+            .populate('category')
             .populate('user')
             .exec(function (err, question) {
+                console.log(question)
                 Answer
                     .find({
                         question: question

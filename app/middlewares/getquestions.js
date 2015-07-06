@@ -4,6 +4,7 @@ var getQuestions = function (petic, resp, next){
 	Question
 	.find({})
 	.populate('user')
+	.populate('category')
 	.sort('-created')
 	.exec(function (err, questions){
 		if (err) {

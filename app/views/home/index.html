@@ -30,8 +30,19 @@
                             <form class="col s12" method='post' action="/save-question">
                                 <div class="row">
                                     <div class="input-field col s12">
-                                        <input id="last_name" name="title" type="text" class="validate">
-                                        <label for="last_name">Titulo</label>
+                                        <div class="col s6">
+                                            <input id="last_name" name="title" type="text" class="validate">
+                                            <label for="last_name">Titulo</label>
+                                        </div>
+                                        <div class="col s6">
+                                            <select class="browser-default" name="selectpicker">
+                                                <option value="" disabled selected>Categorias</option>
+                                                <option value="1">Selecciona una categoria</option>
+                                                {% for category in categories %}
+                                                    <option value="{{category.id}}">{{ category.nameCategory }}</option> 
+                                                {% endfor %}
+                                            </select>
+                                        </div>
                                     </div>
                                     <div class="input-field col s12">
                                         <textarea id="textarea1" name="content" class="materialize-textarea"></textarea>
@@ -71,17 +82,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                    {% for question in questions %}
+                            {% for question in questions %}
                             <tr>
                                 <td>
                                     <img class="circle img" src="{{question.user.url_foto}}" alt="">
                                     <a class="vertical-m" href="#">{{question.user.displayName}} </a>
                                 </td>
                                 <td><a href="question/{{question.slug}}">{{question.title}}</a></td>
-                                <td></td>
+                                <td>{{question.category.nameCategory}}</td>
                                 <td>{{question.created|date('Y-m-d')}}</td>
                             </tr>
-                    {% endfor %}
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>

@@ -3,7 +3,12 @@ var Schema = mongoose.Schema;
 
 var askSchema = new Schema({
     user: {
-    	type : Schema.Types.ObjectId, ref : 'user'
+        type: Schema.Types.ObjectId,
+        ref: 'user'
+    },
+    category: {
+        type: Schema.Types.ObjectId,
+        ref: 'category'
     },
     title: {
         type: String,
@@ -13,10 +18,10 @@ var askSchema = new Schema({
         type: String,
         require: true
     },
-    slug:{
+    slug: {
         type: String
     },
-    created:{
+    created: {
         type: Date,
         default: Date.now
     }
