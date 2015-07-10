@@ -4,6 +4,7 @@
         <div class="container">
             <div class="row">
                 <div class="col s12 center-align move-down">
+                    <h1></h1>
                     <h2>Bienvenido a Hackask!</h2>
                     <h3>Sistema de discucion para programadores</h3>
                     <a data-scroll href="#coments" class="waves-effect waves-light btn">Comentarios</a>
@@ -17,9 +18,8 @@
     <div class="container">
         <div class="row">
             <div class="cols 12 center-align">
-                <h4>Sistema de discuciones para programadores</h4>
-                <!-- Modal Trigger -->
-                <a class="modal-trigger waves-effect waves-light btn" href="#modal1">Formula tu pregunta</a>
+                <!-- Modal Trigger --> <br>
+                <a class="modal-trigger waves-effect waves-light btn" href="#modal1">Nueva Pregunta</a>
                 <!-- Modal Structure -->
                 <div id="modal1" class="modal modal-fixed-footer">
                     <div class="modal-content">
@@ -39,7 +39,7 @@
                                                 <option value="" disabled selected>Categorias</option>
                                                 <option value="1">Selecciona una categoria</option>
                                                 {% for category in categories %}
-                                                    <option value="{{category.id}}">{{ category.nameCategory }}</option> 
+                                                <option value="{{category.id}}">{{ category.nameCategory }}</option>
                                                 {% endfor %}
                                             </select>
                                         </div>
@@ -59,46 +59,32 @@
     </div>
     <br>
     <div class="container">
-        <div class="row">
-            <div class="col s8 offset-s2">
-                <ul class="tabs tabs-color">
-                    <li class="tab col s3"><a class="active" href="#test1">Todos</a></li>
-                    <li class="tab col s3"><a href="#test2">Top 5</a></li>
-                    <li class="tab col s3"><a href="#test3">Favoritos</a></li>
-                </ul>
-                <br>
-            </div>
-        </div>
-        <div class="row">
-            <div id="test1">
-                <div class="valign-wrapper col s10 offset-s1">
-                    <table class="bordered">
-                        <thead>
-                            <tr>
-                                <th data-field="id">Usuario</th>
-                                <th data-field="name">Tema</th>
-                                <th data-field="price">Categoria</th>
-                                <th data-field="price">Fecha</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for question in questions %}
-                            <tr>
-                                <td>
-                                    <img class="circle img" src="{{question.user.url_foto}}" alt="">
-                                    <a class="vertical-m" href="#">{{question.user.displayName}} </a>
-                                </td>
-                                <td><a href="question/{{question.slug}}">{{question.title}}</a></td>
-                                <td>{{question.category.nameCategory}}</td>
-                                <td>{{question.created|date('Y-m-d')}}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div id="test2" class="col s12">Test 2 funciona</div>
-            <div id="test3" class="col s12">Test 3</div>
+        <div class="valign-wrapper col s10 offset-s1">
+            <table class="bordered">
+                <thead>
+                <tr>
+                    <th data-field="id">Usuario</th>
+                    <th data-field="name">Pregunta</th>
+                    <th data-field="price">Categoria</th>
+                    <th data-field="price">Fecha</th>
+                    <th data-field="price">Respuestas</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for question in questions %}
+                <tr>
+                    <td>
+                        <img class="circle img" src="{{question.user.url_foto}}" alt="">
+                        <a class="vertical-m" href="#">{{question.user.displayName}} </a>
+                    </td>
+                    <td><a href="question/{{question.slug}}">{{question.title}}</a></td>
+                    <td><a href="category/{{question.category.slug}}">{{question.category.nameCategory}}</a></td>
+                    <td>{{question.created|date('Y-m-d')}}</td>
+                    <td id="id_question" data-id="{{question.id}}">{{question.answers.length}}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
 </section>

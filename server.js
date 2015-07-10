@@ -6,6 +6,7 @@ var passport = require('passport');
 var cookieParser = require('cookie-parser')
 var bodyParser = require('body-parser');
 
+
 swig.setDefaults({
     cache: false
 })
@@ -43,12 +44,15 @@ server.set('views', __dirname + '/app/views');
 server.use(express.static('./public'));
 
 // Server para los controladores
+require('./app/actions/like.js')(server);
+require('./app/controllers/category')(server);
 require('./app/controllers/home')(server);
 require('./app/controllers/user')(server);
 require('./app/controllers/discuss')(server);
 
 // Server para login de facebook
 require('./app/connections/facebook')(server);
+require('./app/connections/passport-local')(server);
 
 
 server.listen(3000);

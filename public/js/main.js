@@ -4,4 +4,6 @@ $( document ).ready(function(){
 	$('.modal-trigger').leanModal();
 
 	$(".border-b:last").css("border-bottom", "none");
+	$('.tooltipped').tooltip({delay: 50});
+
 });

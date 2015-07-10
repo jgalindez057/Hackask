@@ -1,4 +1,10 @@
+.btn {
+	text-transform: none;
+}
 
+.tab2 {
+	float: none;
+}
 .tabs-color{
 	background-color: #f6f5f3;	
 }

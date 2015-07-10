@@ -24,7 +24,15 @@ var askSchema = new Schema({
     created: {
         type: Date,
         default: Date.now
-    }
+    },
+    likes: {
+        type: Number,
+        default: 0
+    },
+    answers: [{
+        type: Schema.Types.ObjectId,
+        ref: 'answer'
+    }]
 });
 
 var modelAsk = mongoose.model('question', askSchema);

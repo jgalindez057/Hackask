@@ -8,21 +8,19 @@ var homeController = function(server) {
     server.route("/")
         .get(getQuestions, getCategories, function (petic, resp) {
             if (petic.user) {
-                console.log("llego");
                 User.findOne({
-                    password : petic.user.id
+                    password: petic.user.id
                 }, function (err, user) {
                     if (user) {
-                        console.log(user);
                         var name = petic.user._json.first_name;
                         var lastname = petic.user._json.last_name;
                         var url_foto = "http://graph.facebook.com/" + petic.user.id + "/picture";
                         resp.render('home/index', {
-                            categories : petic.category,
+                            categories: petic.category,
                             user: true,
                             name: name + " " + lastname,
                             url_foto: url_foto,
-                            questions : resp.questions
+                            questions: petic.questions
                         });
 
                     } else {
@@ -46,18 +44,18 @@ var homeController = function(server) {
                         var lastname = petic.user._json.last_name;
                         var url_foto = "http://graph.facebook.com/" + petic.user.id + "/picture";
                         resp.render('home/index', {
-                            categories : petic.category,
+                            categories: petic.category,
                             user: true,
                             name: name + " " + lastname,
                             url_foto: url_foto,
-                            questions : resp.questions
+                            questions: petic.questions
                         });
                     }
                 })
             } else
                 resp.render('home/index', {
-                    categories : petic.category,
-                    questions : resp.questions
+                    categories: petic.category,
+                    questions: petic.questions
                 })
         });
 

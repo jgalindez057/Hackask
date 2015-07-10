@@ -46,7 +46,6 @@ var userLogin = function(server) {
             passport.authenticate('local', {
                 successRedirect: '/',
                 failureRedirect: '/login',
-                failureFlash: true
             })
         );
 };

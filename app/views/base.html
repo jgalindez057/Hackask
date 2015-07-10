@@ -6,9 +6,11 @@
     <title>Document</title>
     <link rel="stylesheet" href="/css/materialize.css">
     <link rel="stylesheet" href="/css/main.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
+<div class="navbar-fixed">
     <nav>
         <div class="nav-wrapper container">
             <a href="/" class="brand-logo">Hackask</a>
@@ -27,6 +29,7 @@
             {% endif %}
         </div>
     </nav>
+</div>
     {% block content %} 
 
     {% endblock %}
@@ -34,6 +37,7 @@
     <script src="/js/main.js"></script>
     <script src="/js/materialize.js"></script>
     <script src="/js/smooth-scroll.js"></script>
+<script src="/js/index.js"></script>
     {% block js %} 
 
     {% endblock %}

@@ -9,7 +9,7 @@ var loggerUser = function (petic, resp, next){
         petic.url_foto = url_foto;
 		next();
 	}else{
-		console.log('err');
+		console.log('No hay usuario autenticado');
 		petic.user = false;
 		next();
 	}

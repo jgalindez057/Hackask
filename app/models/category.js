@@ -10,6 +10,9 @@ var categorySchema = new Schema({
 	},
 	contentCategory:{
 		type:String
+	},
+	slug: {
+		type: String
 	}
 });
 
