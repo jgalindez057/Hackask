@@ -8,50 +8,60 @@ var homeController = function(server) {
     server.route("/")
         .get(getQuestions, getCategories, function (petic, resp) {
             if (petic.user) {
-                User.findOne({
-                    password: petic.user.id
-                }, function (err, user) {
-                    if (user) {
-                        var name = petic.user._json.first_name;
-                        var lastname = petic.user._json.last_name;
-                        var url_foto = "http://graph.facebook.com/" + petic.user.id + "/picture";
-                        resp.render('home/index', {
-                            categories: petic.category,
-                            user: true,
-                            name: name + " " + lastname,
-                            url_foto: url_foto,
-                            questions: petic.questions
-                        });
+                if (petic.user.provider === 'facebook') {
+                    console.log("usuario de facebook")
+                    User.findOne({
+                        password: petic.user.id
+                    }, function (err, user) {
+                        if (user) {
+                            var name = petic.user._json.first_name;
+                            var lastname = petic.user._json.last_name;
+                            var url_foto = "http://graph.facebook.com/" + petic.user.id + "/picture";
+                            resp.render('home/index', {
+                                categories: petic.category,
+                                user: true,
+                                name: name + " " + lastname,
+                                url_foto: url_foto,
+                                questions: petic.questions
+                            });
 
-                    } else {
-                        var user = new User({
-                            first_name: petic.user.name.givenName,
-                            last_name: petic.user.name.familyName,
-                            displayName: petic.user.displayName,
-                            password: petic.user.id,
-                            url_foto: "http://graph.facebook.com/" + petic.user.id + "/picture"
-                        })
+                        } else {
+                            var user = new User({
+                                first_name: petic.user.name.givenName,
+                                last_name: petic.user.name.familyName,
+                                displayName: petic.user.displayName,
+                                password: petic.user.id,
+                                url_foto: "http://graph.facebook.com/" + petic.user.id + "/picture"
+                            })
 
-                        user.save(function(err) {
-                            if (err) {
-                                console.log("Ya esta guardado esre");
-                                console.log(user)
-                                return;
-                            }
-                        });
+                            user.save(function (err) {
+                                if (err) {
+                                    console.log("Ya esta guardado esre");
+                                    console.log(user)
+                                    return;
+                                }
+                            });
 
-                        var name = petic.user._json.first_name;
-                        var lastname = petic.user._json.last_name;
-                        var url_foto = "http://graph.facebook.com/" + petic.user.id + "/picture";
-                        resp.render('home/index', {
-                            categories: petic.category,
-                            user: true,
-                            name: name + " " + lastname,
-                            url_foto: url_foto,
-                            questions: petic.questions
-                        });
-                    }
-                })
+                            var name = petic.user._json.first_name;
+                            var lastname = petic.user._json.last_name;
+                            var url_foto = "http://graph.facebook.com/" + petic.user.id + "/picture";
+                            resp.render('home/index', {
+                                categories: petic.category,
+                                user: true,
+                                name: name + " " + lastname,
+                                url_foto: url_foto,
+                                questions: petic.questions
+                            });
+                        }
+                    })
+                } else {
+                    resp.render('home/index', {
+                        user: true,
+                        name: petic.user.displayName,
+                        categories: petic.category,
+                        questions: petic.questions
+                    });
+                }
             } else
                 resp.render('home/index', {
                     categories: petic.category,

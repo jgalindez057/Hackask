@@ -4,7 +4,7 @@ var User = require('../models/user');
 
 var passportLocal = function (server) {
 
-    passport.use(new LocalStrategy({
+    passport.use('login', new LocalStrategy({
             usernameField: 'email',
         },
         function (email, password, done) {

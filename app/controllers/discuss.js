@@ -67,7 +67,6 @@ var disscuss = function(server) {
                 .populate('category')
                 .populate('user')
                 .exec(function (err, question) {
-                console.log(question)
                 Answer
                     .find({
                         question: question
@@ -111,8 +110,6 @@ var disscuss = function(server) {
                     question.answers.push(answer._id);
                     question.save(function (err, question) {
                         if (err) return next(err);
-                        console.log(petic.params);
-
                         resp.redirect('/question/' + petic.params.slug);
                     });
                                 

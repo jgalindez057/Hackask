@@ -3,13 +3,13 @@ var swig = require('swig');
 var server = express();
 var session = require('express-session');
 var passport = require('passport');
-var cookieParser = require('cookie-parser')
+var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 
 swig.setDefaults({
     cache: false
-})
+});
 
 // Configuracion express
 server.use(bodyParser.urlencoded({
@@ -44,7 +44,6 @@ server.set('views', __dirname + '/app/views');
 server.use(express.static('./public'));
 
 // Server para los controladores
-require('./app/actions/like.js')(server);
 require('./app/controllers/category')(server);
 require('./app/controllers/home')(server);
 require('./app/controllers/user')(server);
@@ -53,6 +52,7 @@ require('./app/controllers/discuss')(server);
 // Server para login de facebook
 require('./app/connections/facebook')(server);
 require('./app/connections/passport-local')(server);
+require('./app/connections/passport-singup')(server);
 
 
 server.listen(3000);

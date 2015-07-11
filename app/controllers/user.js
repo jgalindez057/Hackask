@@ -1,5 +1,7 @@
 var User = require('../models/user');
 var passport = require('passport');
+var getQuestions = require('../middlewares/getquestions');
+var getCategories = require('../middlewares/getcategories');
 
 var userLogin = function(server) {
 
@@ -14,38 +16,21 @@ var userLogin = function(server) {
         .get(function(petic, resp) {
             resp.render('user/singup');
         })
-        .post(function(petic, resp) {
-            var user = new User({
-                first_name: petic.body.first_name,
-                last_name: petic.body.last_name,
-                displayName: petic.body.displayName,
-                email: petic.body.email,
-                password: petic.body.password
-            });
-
-            user.save(function(err) {
-                if (err) {
-                    console.log(err);
-                    console.log(petic.body)
-                    resp.redirect("/singup");
-                    return;
-                } else {
-                    resp.render('home/index', {
-                        user: true,
-                        name: petic.body.first_name + " " + petic.body.last_name
-                    });
-                }
-            });
-        });
+        .post(
+        passport.authenticate('singup', {
+            successRedirect: '/',
+            failureRedirect: '/err'
+        })
+    );
 
     server.route("/login")
         .get(function(petic, resp) {
             resp.render('user/login');
         })
         .post(
-            passport.authenticate('local', {
+        passport.authenticate('login', {
                 successRedirect: '/',
-                failureRedirect: '/login',
+            failureRedirect: '/login'
             })
         );
 };

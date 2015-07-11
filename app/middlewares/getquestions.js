@@ -12,7 +12,6 @@ var getQuestions = function (petic, resp, next){
 			console.log(err)
 		};
 			petic.questions = questions;
-			console.log(questions);
 		next();
 	});
 };
