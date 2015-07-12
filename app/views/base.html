@@ -7,22 +7,27 @@
     <link rel="stylesheet" href="/css/materialize.css">
     <link rel="stylesheet" href="/css/main.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/font/folk/stylesheet.css"/>
 </head>
 
 <body>
 <div class="navbar-fixed">
-    <nav>
+    <nav class="nav-color">
         <div class="nav-wrapper container">
+            <img class="icon" src="/img/HznhvglX_normal.png" alt=""/>
             <a href="/" class="brand-logo">Hackask</a>
                 <!-- Dropdown Trigger -->
              {% if (user) %}
                 <ul class="right hide-on-med-and-down">
-                <img class="left circle edit-photo" src="{{ url_foto }}" alt="">
+                    <img class="left circle edit-photo" src="{{ url_foto }}" height="50px" width="50px" alt="">
                     <li><a href="#">{{ name }}</a></li>
                     <li><a href="/logout">Logout</a></li>
             </ul>
             {% else %}
             <ul class="right hide-on-med-and-down">
+                <li><a href="#">Usuarios</a></li>
+                <li><a href="#coments">Comentarios</a></li>
+                <li><a href="#">Chat</a></li>
                     <li><a href="/singup">Registrarse</a></li>
                      <li><a href="/login">Iniciar sesion</a></li>
              </ul>

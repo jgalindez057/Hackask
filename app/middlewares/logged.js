@@ -10,11 +10,13 @@ var loggerUser = function (petic, resp, next){
 			petic.url_foto = url_foto;
 			next();
 		} else {
-			var name = petic.user.first_name;
-			var lastname = petic.user.last_name;
+			name = petic.user.first_name;
+			lastname = petic.user.last_name;
+			url_foto = petic.user.url_foto;
 			petic.user = true;
 			petic.name = name;
 			petic.lastname = lastname;
+			petic.url_foto = url_foto;
 			next();
 		}
 	}else{
@@ -22,6 +24,6 @@ var loggerUser = function (petic, resp, next){
 		petic.user = false;
 		next();
 	}
-}
+};;
 
 module.exports = loggerUser;

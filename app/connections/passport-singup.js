@@ -16,7 +16,7 @@ var passportSingup = function (server) {
                 email: email
             }, function (err, user) {
                 if (err) {
-                    console.log(err)
+                    console.log(err);;
                     return done(err);
                 }
                 if (user) {
@@ -31,7 +31,8 @@ var passportSingup = function (server) {
                         last_name: req.body.last_name,
                         displayName: req.body.displayName,
                         email: email,
-                        password: password
+                        password: password,
+                        url_foto: '/img/user-icon.png'
                     });
                     // save the user
                     newUser.save(function (err) {

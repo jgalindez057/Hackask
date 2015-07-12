@@ -4,11 +4,8 @@
         <div class="container">
             <div class="row">
                 <div class="col s12 center-align move-down">
-                    <h1></h1>
-                    <h2>Bienvenido a Hackask!</h2>
+                    <h1 class="font-folk">Bienvenido a Hackask!</h1>
                     <h3>Sistema de discucion para programadores</h3>
-                    <a data-scroll href="#coments" class="waves-effect waves-light btn">Comentarios</a>
-                    <a class="waves-effect waves-light btn">Chat</a>
                 </div>
             </div>
         </div>
@@ -18,7 +15,9 @@
     <div class="container">
         <div class="row">
             <div class="cols 12 center-align">
-                <!-- Modal Trigger --> <br>
+                <!-- Modal Trigger --> <br> <br/>
+
+                <h3><b>Entradas Recientes</b></h3>
                 <a class="modal-trigger waves-effect waves-light btn" href="#modal1">Nueva Pregunta</a>
                 <!-- Modal Structure -->
                 <div id="modal1" class="modal modal-fixed-footer">
@@ -59,32 +58,73 @@
     </div>
     <br>
     <div class="container">
-        <div class="valign-wrapper col s10 offset-s1">
-            <table class="bordered">
-                <thead>
-                <tr>
-                    <th data-field="id">Usuario</th>
-                    <th data-field="name">Pregunta</th>
-                    <th data-field="price">Categoria</th>
-                    <th data-field="price">Fecha</th>
-                    <th data-field="price">Respuestas</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for question in questions %}
-                <tr>
-                    <td>
-                        <img class="circle img" src="{{question.user.url_foto}}" alt="">
-                        <a class="vertical-m" href="#">{{question.user.displayName}} </a>
-                    </td>
-                    <td><a href="question/{{question.slug}}">{{question.title}}</a></td>
-                    <td><a href="category/{{question.category.slug}}">{{question.category.nameCategory}}</a></td>
-                    <td>{{question.created|date('Y-m-d')}}</td>
-                    <td id="id_question" data-id="{{question.id}}">{{question.answers.length}}</td>
-                </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+        <div class="row">
+            <div class="col s9">
+                <div class="one-coment">
+                    <div class="row">
+                        <div class="col s1">
+                            <img class="circle img img-s" src="/img/user3-128x128.jpg" height="50px" width="50px"
+                                 alt="">
+                        </div>
+                        <div class="col s11">
+                            <div class="display-coments">
+                                <a href="#"><h4 class="title-coment">A great story never told</h4></a>
+
+                                <p class="with-text">It was a cold December morning, as I sat out on my porch I decided
+                                    today was the day. <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid corporis dignissimos ea eius eum officiis voluptatum. Adipisci amet autem corporis doloribus ipsa nostrum obcaecati praesentium voluptates. Aut autem ea sapiente!</span><span>Aliquid architecto blanditiis consequatur cumque deserunt dicta dolor, doloribus eius esse et expedita explicabo facilis ipsa itaque laborum magni minus, praesentium quaerat quasi qui quia quos, reprehenderit saepe sapiente sunt.</span>
+                                </p>
+                                <address><a href="#">James Reddy </a> in <a href="">Ruby</a> 23 minute read</address>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="one-coment">
+                    <div class="row">
+                        <div class="col s1">
+                            <img class="circle img img-s" src="/img/user3-128x128.jpg" height="50px" width="50px"
+                                 alt="">
+                        </div>
+                        <div class="col s11">
+                            <div class="display-coments">
+                                <a href="#"><h4 class="title-coment">Builing, Hacking, Creating</h4></a>
+
+                                <p class="with-text">It was a cold December morning, as I sat out on my porch I decided
+                                    today was the day. <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid corporis dignissimos ea eius eum officiis voluptatum. Adipisci amet autem corporis doloribus ipsa nostrum obcaecati praesentium voluptates. Aut autem ea sapte sunt.</span>
+                                </p>
+                                <address><a href="#">James Reddy </a> in <a href="">Ruby</a> 23 minute read</address>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--                    {% for question in questions %}
+                                            <img class="circle img" src="{{question.user.url_foto}}" height="50px" width="50px" alt="">
+                                            <a class="vertical-m" href="#">{{question.user.displayName}} </a>
+
+                                         <a href="question/{{question.slug}}">{{question.title}}</a>
+                                    <a href="category/{{question.category.slug}}">{{question.category.nameCategory}}</a>
+                                        {{question.created|date('Y-m-d')}}
+                                        id="id_question" data-id="{{question.id}}">{{question.answers.length}}
+
+                                    {% endfor %}-->
+            </div>
+            <div class="col s3">
+                <h5><b>Buscar </b><i class="material-icons icon-search">search</i></h5>
+
+                <form>
+                    <div class="input-field">
+                        <input id="search" type="search" placeholder="Escribe la palabra clave" required>
+                    </div>
+                </form>
+                <br/>
+                <h5><b>Tweet de la semana</b></h5>
+                <blockquote class="twitter-tweet" lang="es"><p lang="en" dir="ltr">Never be ashamed of your passion. No
+                    matter how crazy or unique it is. Nobody else needs to love it, or understand it. It&#39;s YOUR
+                    passion.</p>&mdash; Steve Jobs (@LegendSteveJobs) <a
+                        href="https://twitter.com/LegendSteveJobs/status/613363770245648384">junio 23, 2015</a>
+                </blockquote>
+                <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </div>
         </div>
     </div>
 </section>

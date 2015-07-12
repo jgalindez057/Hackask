@@ -1,3 +1,35 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+
+/*font-family: 'Ubuntu', sans-serif;*/
+body {
+	font-family: 'Open Sans', sans-serif;
+}
+
+.nav-color {
+	background-color: white;
+}
+
+nav ul a {
+	color: darkslategrey;
+}
+
+.icon {
+	padding-top: 7px;
+}
+
+nav .brand-logo {
+	padding-left: 10px;
+	color: darkslategray;
+}
+
+nav ul a:hover {
+	color: darkslategrey;
+}
+
+.font-folk {
+	font-family: 'folksregular';
+}
+
 .btn {
 	text-transform: none;
 }
@@ -11,8 +43,10 @@
 
 .image{
 	padding-top:50px;
-	padding-bottom:50px;background:url(../img/team.jpg) no-repeat fixed;
-	background-size:cover;height:600px
+	padding-bottom: 50px;
+	background: url(../img/code.jpg) no-repeat fixed;
+	background-size: cover;
+	height: 500px
 }
 
 .edit-photo{
@@ -20,22 +54,17 @@
 }
 
 .move-down{
-	margin-top:100px;
+	margin-top: 80px;
 	color:#fff
 }
 #coments{
 	padding:20px 0;
-	background-color:#f6f5f3;
+	background-color: #f4f4f4;
 }
 
-.vertical-m2{
-	  padding-left: 10px;
-  	vertical-align: 40px;
-}
-
-.vertical-m{
-	  padding-left: 10px;
-  	vertical-align: 20px;
+.one-coment {
+	padding-bottom: 10px;
+	border-bottom: 2px solid #ebebeb;
 }
 
 .border-b{
@@ -47,4 +76,32 @@
 .edit-p{
 	  padding-left: 10px;
   	   margin-top: -30px;
+}
+
+.display-coments {
+	display: inline-block;
+}
+
+.title-coment {
+	-webkit-transition: all 300ms ease;
+	-moz-transition: all 300ms ease;
+	-ms-transition: all 300ms ease;
+	-o-transition: all 300ms ease;
+	transition: all 300ms ease;
+	font-weight: bold;
+	color: #333337;
+}
+
+.title-coment:hover {
+	font-weight: bold;
+	color: darkgrey;
+}
+
+.img-s {
+	margin-bottom: -50px;
+}
+
+.input-field input[type=search] {
+	padding-left: 20px;
+	width: 210px;
 }

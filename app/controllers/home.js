@@ -9,7 +9,8 @@ var homeController = function(server) {
         .get(getQuestions, getCategories, function (petic, resp) {
             if (petic.user) {
                 if (petic.user.provider === 'facebook') {
-                    console.log("usuario de facebook")
+                    console.log("usuario de facebook");
+                    ;
                     User.findOne({
                         password: petic.user.id
                     }, function (err, user) {
@@ -32,13 +33,15 @@ var homeController = function(server) {
                                 displayName: petic.user.displayName,
                                 password: petic.user.id,
                                 url_foto: "http://graph.facebook.com/" + petic.user.id + "/picture"
-                            })
+                            });
+                            ;
 
                             user.save(function (err) {
                                 if (err) {
                                     console.log("Ya esta guardado esre");
-                                    console.log(user)
-                                    return;
+                                    console.log(user);
+                                    ;
+
                                 }
                             });
 
@@ -57,6 +60,7 @@ var homeController = function(server) {
                 } else {
                     resp.render('home/index', {
                         user: true,
+                        url_foto: petic.user.url_foto,
                         name: petic.user.displayName,
                         categories: petic.category,
                         questions: petic.questions
