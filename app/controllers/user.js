@@ -13,24 +13,21 @@ var userLogin = function(server) {
 
 
     server.route("/singup")
-        .get(function(petic, resp) {
-            resp.render('user/singup');
-        })
         .post(
         passport.authenticate('singup', {
             successRedirect: '/',
-            failureRedirect: '/err'
+            failureRedirect: '/access'
         })
     );
 
-    server.route("/login")
+    server.route("/access")
         .get(function(petic, resp) {
-            resp.render('user/login');
+            resp.render('user/access');
         })
         .post(
         passport.authenticate('login', {
-                successRedirect: '/',
-            failureRedirect: '/login'
+            successRedirect: '/',
+            failureRedirect: '/access'
             })
         );
 };

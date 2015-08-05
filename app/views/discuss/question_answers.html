@@ -1,0 +1,116 @@
+{% extends '../base.html' %} {% block content %}
+    <section id="questions">
+        <div id="fb-root"></div>
+    <br>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col s9">
+                <div class="row">
+                    <div class="center-align">
+                        <div class="col s1"><br>
+                            <img class="circle" src="{{question.user.url_foto}}" alt="">
+                        </div>
+                        <br>
+                        <div class="col s11 left-align border-b">
+                            <small><a href="">{{ question.user.displayName }}</a></small>
+                            <small class="right margin-date">{{moment(question.created).locale("es").fromNow()}}</small>
+                            <h3>{{ question.title }}</h3>
+                            <p class="text">{{ question.content | safe}}</p>
+                            <!-- Modal Trigger -->
+                            {% if (user) %}
+                                <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Responder</a>
+                            {% else %}
+                                <a href="/access">Inicia sesion para responder</a>
+                            {% endif %}
+                            <div class="right move-sociallike">
+                                <div class="fb-like" data-layout="button_count" data-show-faces="none" data-href="http://hackstore.net/descargar-heroe-de-centro-comercial-2-2015-blu-ray-rip-hd-latino/"></div>
+                                <div class="g-plusone" data-size="medium" data-width="300" data-href="http://hackstore.net/descargar-heroe-de-centro-comercial-2-2015-blu-ray-rip-hd-latino/"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <!-- Modal Structure -->
+                <div id="modal1" class="modal bottom-sheet">
+                    <div class="modal-content">
+                        <h4>Modal Answer</h4>
+                        <form method='POST' action="/save-answer/{{question.slug}}">
+                            <div class="row">
+                                <div class="input-field col s8">
+                                <textarea id="redactor" name="content" required></textarea>
+                                </div>
+                            </div>
+                            <button type="submit" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</button>
+                        </form>
+                    </div>
+                </div>
+                {% for answer in answers%}
+                    <div class="border-b">
+                        <div class="row">
+                            <div class="col s1">
+                                <img class="circle" height="50px" width="50px" src="{{answer.user.url_foto}}"alt="">
+                            </div>
+                            <div class="col s11">
+                                <small><a href="#" class="vertical-m2">{{answer.user.displayName}}</a></small>
+                                <small class="right margin-date">{{moment(answer.created).locale("es").fromNow()}}</small>
+                                <p>
+                                    {{answer.content | safe}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <footer>
+    <article class="information-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col s4">
+                    <h5><b>Hackask</b></h5>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores fugit, velit. Amet aut, consectetur cor Lorem ipsum dolor sit amet, consectetur adipisicing </p>
+                </div>
+                <div class="col s4 move-box">
+                    <h5>Suscribirse</h5>
+                    <small>Suscribite y te mantendremos informados.</small>
+                    <form>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input placeholder="Email" id="first_name" type="text" class="validate">
+                                <a class="waves-effect waves-light btn blue">Enviar</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col s4">
+                    <h5>Contactame</h5>
+                    <i class="fa fa-linkedin contact-footer"></i> <a class="grey-text" href=""> <b>Linkedin:</b> linkedin/jgalindez1 </a>
+                    <br/>
+                    <i class="fa fa-envelope-o contact-footer"></i> <a class="grey-text" href=""><b>Correo:</b> galindezj2@gmail.com</a>
+                    <br/>
+                    <i class="fa fa-phone contact-footer"></i> <a class="grey-text" href=""><b>Telefono:</b> 0231-232-45-21</a>
+                    <br>
+                    <i class="fa fa-skype contact-footer"> <a class="grey-text" href=""><b>Skype:</b> jgalindez2</a></i>
+                </div>
+            </div>
+        </div>
+    </article>
+    <article class="box-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col s6 copyright">
+                    Copyright © 2015 Hackask. All Right Reserved.
+                </div>
+                <div class="col s6 icon-footer">
+                    <i class="fa fa-facebook-official right fa-2x"></i>
+                    <i class="fa fa-twitter right fa-2x"></i>
+                    <i class="fa fa-github right fa-2x"></i>
+                </div>
+            </div>
+        </div>
+    </article>
+</footer>
+    </section>
+{% endblock %}

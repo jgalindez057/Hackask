@@ -8,38 +8,46 @@ var User = require('../models/user');
 var passportSingup = function (server) {
 
     passport.use('singup', new LocalStrategy({
-            usernameField: 'email',
+            usernameField: 'displayName',
             passReqToCallback: true // Permite pasar todo el request a req
         },
-        function (req, email, password, done) {
+        function (req, displayName, password, done) {
             User.findOne({
-                email: email
+                displayName: displayName
             }, function (err, user) {
                 if (err) {
-                    console.log(err);;
+                    console.log(err);
                     return done(err);
                 }
                 if (user) {
-                    console.log('Ya existe el usuario');
-                    return done(null, false, {
+                    console.log('Ya existe un usuario con ese nombre');
+                   return done(null, false, {
                         message: 'Incorrect username.'
                     });
                 } else {
-                    var newUser = new User({
+                    var newUser = new User();
                         // set the user's local credentials
-                        first_name: req.body.first_name,
-                        last_name: req.body.last_name,
-                        displayName: req.body.displayName,
-                        email: email,
-                        password: password,
-                        url_foto: '/img/user-icon.png'
-                    });
+                        newUser.displayName = req.body.displayName;
+                        newUser.email = email;
+                        newUser.password = password;
+                        newUser.confirmPassword = req.body.confirmPassword;
+                        newUser.url_foto = '/img/user-icon.png';
                     // save the user
                     newUser.save(function (err) {
+                     if (newUser.password != newUser.confirmPassword) {
+                            console.log(req.body);
+                            console.log('Las contraseñas con coinciden:');
+                        return done(null, false, {
+                        message: 'Error in Saving user.'
+                    });
+                        }                    
+
                         if (err) {
                             console.log(req.body);
                             console.log('Error in Saving user: ' + err);
-                            throw err;
+                        return done(null, false, {
+                        message: 'Error in Saving user.'
+                    });
                         }
                         console.log('User Registration succesful');
                         return done(null, newUser);

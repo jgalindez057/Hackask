@@ -1,51 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-    <link rel="stylesheet" href="/css/materialize.css">
-    <link rel="stylesheet" href="/css/main.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="/font/folk/stylesheet.css"/>
-</head>
-
-<body>
-<div class="navbar-fixed">
-    <nav class="nav-color">
-        <div class="nav-wrapper container">
-            <img class="icon" src="/img/HznhvglX_normal.png" alt=""/>
-            <a href="/" class="brand-logo">Hackask</a>
-                <!-- Dropdown Trigger -->
-             {% if (user) %}
-                <ul class="right hide-on-med-and-down">
-                    <img class="left circle edit-photo" src="{{ url_foto }}" height="50px" width="50px" alt="">
-                    <li><a href="#">{{ name }}</a></li>
-                    <li><a href="/logout">Logout</a></li>
-            </ul>
-            {% else %}
-            <ul class="right hide-on-med-and-down">
-                <li><a href="#">Usuarios</a></li>
-                <li><a href="#coments">Comentarios</a></li>
-                <li><a href="#">Chat</a></li>
-                    <li><a href="/singup">Registrarse</a></li>
-                     <li><a href="/login">Iniciar sesion</a></li>
-             </ul>
-            {% endif %}
-        </div>
-    </nav>
-</div>
-    {% block content %} 
-
-    {% endblock %}
-    <script src="/js/jquery-2.1.1.min.js"></script>
-    <script src="/js/main.js"></script>
-    <script src="/js/materialize.js"></script>
-    <script src="/js/smooth-scroll.js"></script>
-<script src="/js/index.js"></script>
-    {% block js %} 
-
-    {% endblock %}
-</body>
-
+    <head>
+        <meta charset="UTF-8">
+        <title>Document</title>
+        <link rel="stylesheet" href="/css/materialize.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/font/folk/stylesheet.css" />
+        <link rel="stylesheet" href="/css/redactor.css">
+        <link rel="stylesheet" href="/css/component-modal.css">
+        <link rel="stylesheet" href="/css/default-modal.css">
+        <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" href="/css/jquery.dropdown.min.css">
+        <link rel="stylesheet" href="/css/jqx.darkblue.css">
+        <script src="https://apis.google.com/js/platform.js" async defer>
+        {lang: 'es'}
+        </script>
+    </head>
+    <body>
+        <header>
+            <div class="navbar-fixed">
+                <nav class="nav-color">
+                    <div class="nav-wrapper container">
+                        <img class="icon" src="/img/HznhvglX_normal.png" alt=""/>
+                        <a href="/" class="brand-logo"><b>Hackask</b></a>
+                        <!-- Dropdown Trigger -->
+                        {% if (user) %}
+                            <ul class="right hide-on-med-and-down">
+                                <li><a href="#">Inicio</a></li>
+                                <li><a href="#">Discuss</a></li>
+                                <li><a href="#">Chat</a></li>
+                                <li><a href="#" data-jq-dropdown="#jq-dropdown-1"><img class="left circle edit-photo" src="{{ url_foto }}" height="50px" width="50px" alt=""></a></li>
+                            </ul>
+                        {% else %}
+                            <ul class="right hide-on-med-and-down">
+                                <li><a href="#">Inicio</a></li>
+                                <li><a href="#">Discuss</a></li>
+                                <li><a href="#">Chat</a></li>
+                                <li><a href="/access">Acceso</a></li>
+                            </ul>
+                        {% endif %}
+                    </div>
+                </nav>
+                <div id="jq-dropdown-1" class="jq-dropdown jq-dropdown-tip">
+                    <ul class="jq-dropdown-menu">
+                        <li><a href="#1">{{ name }}</a></li>
+                        <li><a href="#1">Perfil</a></li>
+                        <li class="jq-dropdown-divider"></li>
+                        <li><a href="/logout">Cerrar Sesion</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        {% block content %} {% endblock %}
+        <script src="/js/jquery-2.1.1.min.js"></script>
+        <script src="/js/main.js"></script>
+        <script src="/js/materialize.js"></script>
+        <script src="/js/smooth-scroll.js"></script>
+        <script src="/js/index.js"></script>
+        <script src="/js/redactor.min.js"></script>
+        <script src="/js/jquery.dropdown.min.js"></script>
+        {% block js %} {% endblock %}
+    </body>
 </html>

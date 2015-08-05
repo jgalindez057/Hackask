@@ -11,7 +11,7 @@ var answerSchema = new Schema({
 	content:{
 		type: String
 	},
-	date:{
+	created:{
 		type: Date, default	: Date.now
 	}
 });

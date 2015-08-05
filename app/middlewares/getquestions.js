@@ -5,13 +5,13 @@ var getQuestions = function (petic, resp, next){
 	.find({})
 	.populate('user')
 	.populate('category')
-		.populate('answers')
+	.populate('answers')
 	.sort('-created')
 	.exec(function (err, questions){
 		if (err) {
 			console.log(err)
 		};
-			petic.questions = questions;
+		petic.questions = questions;
 		next();
 	});
 };

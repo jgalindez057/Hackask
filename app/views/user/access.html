@@ -1,0 +1,125 @@
+{% extends '../base.html' %} {% block content %}
+
+<header>
+    <div class="image2">
+        <div class="container">
+            <div class="row">
+                <div class="col s12 left-align move-down"><br><br>
+                    <h4 class="font-folk white-text"><b>Registrate o Inicia Sesion</b></h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</header> <br><br>  
+<div class="container">
+    <div class="row center-align">
+        <div class="col s5 box-login">
+            <h4>Iniciar Sesion</h4>
+            <small>Inicia sesion con tu cuenta</small>
+            <br><br>
+            <form  method='POST' action="/access">
+                <div class="input-field col s12">
+                    <input placeholder="usuario53@gmail.com" id="last_name" type="text" name='email' class="validate">
+                    <label for="last_name">Email</label>
+                    <br>
+                </div>
+                <div class="input-field col s12">
+                    <input placeholder="......." id="password" type="password" name='password' class="validate">
+                    <br><br>
+                    <label for="password">Contraseña</label>
+                </div>
+                <button type='submit' class="waves-effect waves-light btn blue">Iniciar sesion</button>
+                <br>
+                <br>
+            </form>
+            Tambien Puedes
+            <hr>
+            <br>
+            <small>Iniciar sesion con tu cuenta social</small> <br> <br>
+            <a href="/auth/facebook" class="btn-floating btn-large waves-effect waves-light blue"><i class="fa fa-facebook"></i></a>
+            <a href="/auth/google" class="btn-floating btn-large waves-effect waves-light red"><i class="fa fa-google-plus"></i></a>
+            <a href="/auth/github" class="btn-floating btn-large waves-effect waves-light grey darken-4"><i class="fa fa-github"></i></a>
+        </div>
+        <div class="col s5 box-login2">
+            <h4>Registrate</h4>
+            <small>Aun no posees cuenta? <br> Que esperas?</small> <br><br>
+            <form method='POST' action='/singup'>
+                    <div class="input-field col s12">
+                    <input placeholder="usuario53" type="text" name='displayName' class="validate">
+                    <small>3-25 Caracteres</small>
+                    <label>Nombre de usuario</label>
+                </div>
+                <div class="input-field col s12">
+                    <input placeholder="usuario53@gmail.com" type="email" name='email' class="validate">
+                    <label >Email</label>
+                </div>
+                <div class="input-field col s12">
+                    <input placeholder="....."  type="password" name='password' class="validate">
+                    <small>1-8 Caracteres</small>
+                    <label>Contraseña</label>
+                </div>
+                 <div class="input-field col s12">
+                    <input placeholder="......." id="confirmPassword" type="password" name='confirmPassword' class="validate">
+                    <label for="confirmPassword">Confirmar Contraseña</label>
+                </div>
+                <button type='submit' class="waves-effect waves-light btn blue">Registrarse</button>
+        </form>
+        </div>
+    </div>
+</div>
+<footer>
+    <article class="information-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col s4">
+                    <h5><b>Hackask</b></h5>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores fugit, velit. Amet aut, consectetur cor Lorem ipsum dolor sit amet, consectetur adipisicing </p>
+                </div>
+                <div class="col s4 move-box">
+                    <h5>Suscribirse</h5>
+                    <small>Suscribite y te mantendremos informados.</small>
+                    <form>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input placeholder="Email" id="first_name" type="text" class="validate">
+                                <a class="waves-effect waves-light btn blue">Enviar</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col s4">
+                                        <h5>Contactame</h5>
+                    <i class="fa fa-linkedin contact-footer"></i> <a class="grey-text" href=""> <b>Linkedin:</b> linkedin/jgalindez1 </a>
+                    <br/>
+                    <i class="fa fa-envelope-o contact-footer"></i> <a class="grey-text" href=""><b>Correo:</b> galindezj2@gmail.com</a>
+                    <br/>
+                    <i class="fa fa-phone contact-footer"></i> <a class="grey-text" href=""><b>Telefono:</b> 0231-232-45-21</a>
+                    <br>
+                    <i class="fa fa-skype contact-footer"> <a class="grey-text" href=""><b>Skype:</b> jgalindez2</a></i>
+                </div>
+            </div>
+        </div>
+    </article>
+    <article class="box-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col s6 copyright">
+                    Copyright © 2015 Hackask. All Right Reserved.
+                </div>
+                <div class="col s6 icon-footer">
+                    <i class="fa fa-facebook-official right fa-2x"></i>
+                    <i class="fa fa-twitter right fa-2x"></i>
+                    <i class="fa fa-github right fa-2x"></i>
+                </div>
+            </div>
+        </div>
+    </article>
+</footer>
+{% endblock %}
+
+
+
+
+
+
+

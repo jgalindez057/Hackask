@@ -1,15 +1,17 @@
-var Question = require('../models/question');
-var Answer = require('../models/answer');
-var loggedUser = require('../middlewares/loginUser');
-var logged = require('../middlewares/logged');
-var getUser = require('../middlewares/getuser');
-var slug = require('slugs');
+var Question = require('../models/question'),
+    Answer = require('../models/answer'),
+    loginUser = require('../middlewares/loginUser'),
+    loggedInformation = require('../middlewares/loggedInformation'),
+    getUser = require('../middlewares/getuser'),
+    async = require('async'),
+    slug = require('slugs'),
+    moment = require('moment');
 
 var disscuss = function(server) {
 
     server.route('/save-question')
 
-    .post(loggedUser, getUser, function (petic, resp) {
+    .post(loginUser, getUser, function(petic, resp) {
         var question = new Question({
             user: petic.user,
             title: petic.body.title,
@@ -18,7 +20,7 @@ var disscuss = function(server) {
             category: petic.body.selectpicker
         });
 
-        question.save (function(err) {
+        question.save(function(err) {
             if (err) {
                 console.log("error");
                 console.log(petic.body);
@@ -30,69 +32,90 @@ var disscuss = function(server) {
 
     server.route('/question/:slug')
 
-    .get(logged, function (petic, resp) {
-        Question
-            .findOne({
-                slug: petic.params.slug
-            })
-            .populate('category')
-            .populate('user')
-            .exec(function (err, question) {
-                Answer
-                    .find({
-                        question: question
-                    })
+    .get(loggedInformation, function(petic, resp) {
+
+        async.auto({
+            question: function(callback) {
+                Question
+                    .findOne({slug: petic.params.slug})
                     .populate('user')
-                    .sort('-created')
-                    .exec(function (err, answers) {
-                        resp.render('discuss/question_answers', {
-                            answers: answers,
-                            question: question,
-                            user: petic.user,
-                            name: petic.name + " " + petic.lastname,
-                            url_foto: petic.url_foto
-                        });
+                    .exec(function(err, question) {
+                        if (err) return console.log(err);
+                        callback(null, question)
                     })
-            })
-        });
+            },
+            answer: ['question', function(callback, results) {
+                Answer
+                    .find({question: results.question})
+                    .sort('-created')
+                    .populate('user')
+                    .exec(function (err, answer) {
+                        if (err) return console.log(err);
+                        callback(null, answer)
+                    })
+            }],
+
+        }, function (err, results) {
+            if (err) return (console.log(err));
+
+            resp.render('discuss/question_answers', {
+                moment: moment, 
+                question: results.question,
+                answers: results.answer,
+                user: petic.user,
+                name: petic.name,
+                url_foto: petic.url_foto
+            });
+        })
+    })
 
 
     server.route('/category/question/:slug')
 
-        .get(logged, function (petic, resp) {
-            Question
-                .findOne({
-                    slug: petic.params.slug
-                })
-                .populate('category')
-                .populate('user')
-                .exec(function (err, question) {
-                Answer
-                    .find({
-                        question: question
-                    })
+    .get(loggedInformation, function(petic, resp) {
+
+        async.auto({
+            question: function(callback) {
+                Question
+                    .findOne({slug: petic.params.slug})
                     .populate('user')
-                    .sort('-created')
-                    .exec(function (err, answers) {
-                        resp.render('discuss/question_answers', {
-                            answers : answers,
-                            question: question,
-                            user: petic.user,
-                            name: petic.name + " " + petic.lastname,
-                            url_foto: petic.url_foto
-                        });
+                    .exec(function(err, question) {
+                        if (err) return console.log(err);
+                        callback(null, question)
                     })
-            })
-    });
+            },
+            answer: ['question', function(callback, results) {
+                Answer
+                    .find({question: results.question})
+                    .sort('-created')
+                    .populate('user')
+                    .exec(function (err, answer) {
+                        if (err) return console.log(err);
+                        callback(null, answer)
+                    })
+            }],
+
+        }, function (err, results) {
+            if (err) return (console.log(err));
+
+            resp.render('discuss/question_answers', {
+                moment: moment, 
+                question: results.question,
+                answers: results.answer,
+                user: petic.user,
+                name: petic.name,
+                url_foto: petic.url_foto
+            });
+        })
+    })
 
     server.route('/save-answer/:slug')
 
-        .post(loggedUser, getUser, function (petic, resp, next) {
+    .post(loginUser, getUser, function(petic, resp, next) {
         Question
             .findOne({
                 slug: petic.params.slug
             })
-            .populate('user')
             .exec(function(err, question) {
                 var answer = new Answer({
                     user: petic.user,
@@ -108,11 +131,11 @@ var disscuss = function(server) {
 
                     console.log('guardando respuesta');
                     question.answers.push(answer._id);
-                    question.save(function (err, question) {
+                    question.save(function(err, question) {
                         if (err) return next(err);
                         resp.redirect('/question/' + petic.params.slug);
                     });
-                                
+
                 });
 
 

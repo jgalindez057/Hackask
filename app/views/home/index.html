@@ -1,131 +1,173 @@
 {% extends '../base.html' %} {% block content %}
-<header>
-    <div class="image">
+    <header>
+        <div class="image">
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 center-align move-down"><br><br>
+                        <h3 class="font-folk white-text"><b>Sistema de discuci&oacuten <br> para programadores!</b></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section id="articulos">
         <div class="container">
             <div class="row">
-                <div class="col s12 center-align move-down">
-                    <h1 class="font-folk">Bienvenido a Hackask!</h1>
-                    <h3>Sistema de discucion para programadores</h3>
+                <div class="col s12 center-align">
+                    <div id="modal1" class="modal modal-fixed-footer">
+                        <div class="modal-header"> <br>
+                            <h4>Alguna duda?</h4>
+                            <p>Pregunta lo que quieras!</p>
+                        </div>
+                        <div class="modal-content">
+                            <br>
+                            <div class="row">
+                                <form class="col s12" method='post' action="/save-question">
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <div class="col s6">
+                                                <input id="last_name" name="title" type="text" class="validate" required>
+                                                <label for="last_name">Titulo</label>
+                                            </div>
+                                            <div class="col s6">
+                                                <select class="browser-default" name="selectpicker" title="categories" required>
+                                                    <option value="" disabled selected>Categorias</option>
+                                                    <option value="1">Selecciona una categoria</option>
+                                                    {% for category in categories %}
+                                                        <option value="{{category.id}}">{{ category.nameCategory }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            <textarea id="redactor" name="content" required></textarea>
+                                            <br>
+                                            <button type='submit' class="waves-effect waves-light btn">Preguntar</button>
+                                            <br><br><br>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</header>
-<section id="coments">
-    <div class="container">
-        <div class="row">
-            <div class="cols 12 center-align">
-                <!-- Modal Trigger --> <br> <br/>
-
-                <h3><b>Entradas Recientes</b></h3>
-                <a class="modal-trigger waves-effect waves-light btn" href="#modal1">Nueva Pregunta</a>
-                <!-- Modal Structure -->
-                <div id="modal1" class="modal modal-fixed-footer">
-                    <div class="modal-content">
-                        <h4>Alguna duda?</h4>
-                        <p>Pregunta lo que quieras!</p>
-                        <br>
-                        <div class="row">
-                            <form class="col s12" method='post' action="/save-question">
+        <br>
+        <div class="container">
+            <div class="row">
+                <div class="col s9"> <br><br>
+                    <div class="center-align">
+                        <a class="modal-trigger waves-effect waves-light btn grey darken-3" href="#modal1">Nueva Pregunta</a>
+                    </div>
+                    {% for question in questions %}
+                            <div class="one-coment">
                                 <div class="row">
-                                    <div class="input-field col s12">
-                                        <div class="col s6">
-                                            <input id="last_name" name="title" type="text" class="validate">
-                                            <label for="last_name">Titulo</label>
-                                        </div>
-                                        <div class="col s6">
-                                            <select class="browser-default" name="selectpicker" title="categories">
-                                                <option value="" disabled selected>Categorias</option>
-                                                <option value="1">Selecciona una categoria</option>
-                                                {% for category in categories %}
-                                                <option value="{{category.id}}">{{ category.nameCategory }}</option>
-                                                {% endfor %}
-                                            </select>
-                                        </div>
+                                    <div class="col s1">
+                                        <img class="circle img img-s" src="{{question.user.url_foto}}" height="50px" width="50px" alt="">
                                     </div>
-                                    <div class="input-field col s12">
-                                        <textarea id="textarea1" name="content" class="materialize-textarea"></textarea>
-                                        <label for="textarea1">Contenido</label>
+                                    <div class="col s11">
+                                        <div class="display-coments">
+                                            <a href="question/{{question.slug}}"><h4  class="title-coment">{{question.title}}</h4></a>
+                                            <div class="text">
+                                                <p class="with-text">{{question.content | safe}}</p>
+                                            </div><br>
+                                            <address>
+                                                <a href="#">{{question.user.displayName}} </a> in
+                                                <a href="category/{{question.category.slug}}">{{question.category.nameCategory}}</a> {{moment(question.created).locale("es").fromNow()}}
+                                                <a class="right-icon" href="#"><i class="material-icons">comment</i>
+                                                    <small>{{question.answers.length}}</small>
+                                                </a>
+                                            </address>
+                                        </div>
                                     </div>
                                 </div>
-                                <button type='submit' class="waves-effect waves-light btn">Preguntar</button>
+                            </div>
+                        {% endfor %}
+                        <br/>
+                    </div>
+                    <div class="col s3"><br>
+                        <article>
+                            <h5><b>Buscar </b><i class="material-icons icon-search">search</i></h5>
+                            <hr class="hrsidebar left"> <br>
+                            <form>
+                                <div class="input-field">
+                                    <input id="search" type="search" placeholder="Escribe la palabra clave" required>
+                                </div>
                             </form>
+                        </article>
+                        <br/>
+                        <article>
+                            <h5><b>Lo mas comentado</b></h5>
+                            <hr class="hrsidebar left"> <br>
+                            {% for fiveQuestion in fiveQuestions%}
+                                <a href="#"><i class="fa fa-angle-double-right top-5"> {{fiveQuestion._id}} ({{fiveQuestion.size}})</i></a>
+                                <br/>
+                            {% endfor %}
+                        </article>
+                        <br/>
+                        <article>
+                            <h5><b>Tweet de la semana</b></h5>
+                            <hr class="hrsidebar left"> <br>
+                            <blockquote class="twitter-tweet" lang="es">
+                                <p lang="en" dir="ltr">Never be ashamed of your passion. No matter how crazy or unique it is. Nobody else needs to love it, or understand it. It&#39;s YOUR passion.
+                                    </p>&mdash; Steve Jobs (@LegendSteveJobs) <a href="https://twitter.com/LegendSteveJobs/status/613363770245648384">junio 23, 2015</a>
+                                </blockquote>
+                                <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+                            </article>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <br>
-    <div class="container">
-        <div class="row">
-            <div class="col s9">
-                <div class="one-coment">
-                    <div class="row">
-                        <div class="col s1">
-                            <img class="circle img img-s" src="/img/user3-128x128.jpg" height="50px" width="50px"
-                                 alt="">
-                        </div>
-                        <div class="col s11">
-                            <div class="display-coments">
-                                <a href="#"><h4 class="title-coment">A great story never told</h4></a>
-
-                                <p class="with-text">It was a cold December morning, as I sat out on my porch I decided
-                                    today was the day. <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid corporis dignissimos ea eius eum officiis voluptatum. Adipisci amet autem corporis doloribus ipsa nostrum obcaecati praesentium voluptates. Aut autem ea sapiente!</span><span>Aliquid architecto blanditiis consequatur cumque deserunt dicta dolor, doloribus eius esse et expedita explicabo facilis ipsa itaque laborum magni minus, praesentium quaerat quasi qui quia quos, reprehenderit saepe sapiente sunt.</span>
-                                </p>
-                                <address><a href="#">James Reddy </a> in <a href="">Ruby</a> 23 minute read</address>
+            </section>
+            <footer>
+                <article class="information-footer">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col s4">
+                                <h5><b>Hackask</b></h5>
+                                <hr class="hrsidebar left"> <br>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores fugit, velit. Amet aut, consectetur cor Lorem ipsum dolor sit amet, consectetur adipisicing </p>
+                            </div>
+                            <div class="col s4 move-box">
+                                <h5>Suscribirse</h5>
+                                <hr class="hrsidebar left"> <br>
+                                <small>Suscribite y te mantendremos informados.</small>
+                                <form>
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <input placeholder="Email" id="first_name" type="text" class="validate">
+                                            <a class="waves-effect waves-light btn blue">Enviar</a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col s4">
+                                <h5>Contactame</h5>
+                                <hr class="hrsidebar left"> <br>
+                                <i class="fa fa-linkedin contact-footer"></i> <a class="grey-text" href=""> <b>Linkedin:</b> linkedin/jgalindez1 </a>
+                                <br/>
+                                <i class="fa fa-envelope-o contact-footer"></i> <a class="grey-text" href=""><b>Correo:</b> galindezj2@gmail.com</a>
+                                <br/>
+                                <i class="fa fa-phone contact-footer"></i> <a class="grey-text" href=""><b>Telefono:</b> 0231-232-45-21</a>
+                                <br>
+                                <i class="fa fa-skype contact-footer"> <a class="grey-text" href=""><b>Skype:</b> jgalindez2</a></i>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="one-coment">
-                    <div class="row">
-                        <div class="col s1">
-                            <img class="circle img img-s" src="/img/user3-128x128.jpg" height="50px" width="50px"
-                                 alt="">
-                        </div>
-                        <div class="col s11">
-                            <div class="display-coments">
-                                <a href="#"><h4 class="title-coment">Builing, Hacking, Creating</h4></a>
-
-                                <p class="with-text">It was a cold December morning, as I sat out on my porch I decided
-                                    today was the day. <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid corporis dignissimos ea eius eum officiis voluptatum. Adipisci amet autem corporis doloribus ipsa nostrum obcaecati praesentium voluptates. Aut autem ea sapte sunt.</span>
-                                </p>
-                                <address><a href="#">James Reddy </a> in <a href="">Ruby</a> 23 minute read</address>
+                </article>
+                <article class="box-footer">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col s6 copyright">
+                                Copyright © 2015 Hackask. All Right Reserved.
+                            </div>
+                            <div class="col s6 icon-footer">
+                                <i class="fa fa-facebook-official right fa-2x"></i>
+                                <i class="fa fa-twitter right fa-2x"></i>
+                                <i class="fa fa-github right fa-2x"></i>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <!--                    {% for question in questions %}
-                                            <img class="circle img" src="{{question.user.url_foto}}" height="50px" width="50px" alt="">
-                                            <a class="vertical-m" href="#">{{question.user.displayName}} </a>
-
-                                         <a href="question/{{question.slug}}">{{question.title}}</a>
-                                    <a href="category/{{question.category.slug}}">{{question.category.nameCategory}}</a>
-                                        {{question.created|date('Y-m-d')}}
-                                        id="id_question" data-id="{{question.id}}">{{question.answers.length}}
-
-                                    {% endfor %}-->
-            </div>
-            <div class="col s3">
-                <h5><b>Buscar </b><i class="material-icons icon-search">search</i></h5>
-
-                <form>
-                    <div class="input-field">
-                        <input id="search" type="search" placeholder="Escribe la palabra clave" required>
-                    </div>
-                </form>
-                <br/>
-                <h5><b>Tweet de la semana</b></h5>
-                <blockquote class="twitter-tweet" lang="es"><p lang="en" dir="ltr">Never be ashamed of your passion. No
-                    matter how crazy or unique it is. Nobody else needs to love it, or understand it. It&#39;s YOUR
-                    passion.</p>&mdash; Steve Jobs (@LegendSteveJobs) <a
-                        href="https://twitter.com/LegendSteveJobs/status/613363770245648384">junio 23, 2015</a>
-                </blockquote>
-                <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-            </div>
-        </div>
-    </div>
-</section>
-{% endblock %}
+                </article>
+            </footer>
+        {% endblock %}

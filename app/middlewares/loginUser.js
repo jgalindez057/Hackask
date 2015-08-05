@@ -2,7 +2,8 @@ var loggerUser = function (petic, resp, next){
 	if (petic.user) {
 		next();
 	}else{
-		resp.redirect('/login')
+		console.log('usuarion no autenticado')
+		resp.redirect('/access');
 	}
 }
 

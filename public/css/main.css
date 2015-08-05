@@ -13,6 +13,7 @@ nav ul a {
 	color: darkslategrey;
 }
 
+
 .icon {
 	padding-top: 7px;
 }
@@ -26,8 +27,25 @@ nav ul a:hover {
 	color: darkslategrey;
 }
 
-.font-folk {
-	font-family: 'folksregular';
+header h3{
+	  letter-spacing: 1px;
+  line-height: 60px;
+} 
+
+.image{
+	padding-top:50px;
+	padding-bottom: 50px;
+	background: url(../img/code.jpg) no-repeat fixed;
+	background-size: cover;
+	height: 400px
+}
+
+.image2{
+	padding-top:50px;
+	padding-bottom: 50px;
+	background: url(../img/spring.jpg) no-repeat fixed;
+	background-size: cover;
+	height: 300px
 }
 
 .btn {
@@ -41,26 +59,11 @@ nav ul a:hover {
 	background-color: #f6f5f3;	
 }
 
-.image{
-	padding-top:50px;
-	padding-bottom: 50px;
-	background: url(../img/code.jpg) no-repeat fixed;
-	background-size: cover;
-	height: 500px
-}
 
 .edit-photo{
 	margin-top: 7px;
 }
 
-.move-down{
-	margin-top: 80px;
-	color:#fff
-}
-#coments{
-	padding:20px 0;
-	background-color: #f4f4f4;
-}
 
 .one-coment {
 	padding-bottom: 10px;
@@ -68,9 +71,8 @@ nav ul a:hover {
 }
 
 .border-b{
-	padding-top: 20px;
-	padding-bottom: 15px;
-	border-bottom: 3px solid #ebebeb;
+	padding-top: 10px;
+	border-bottom: 1px solid #ebebeb;
 }
 
 .edit-p{
@@ -94,7 +96,7 @@ nav ul a:hover {
 
 .title-coment:hover {
 	font-weight: bold;
-	color: darkgrey;
+	color: grey;																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																											rey;
 }
 
 .img-s {
@@ -104,4 +106,65 @@ nav ul a:hover {
 .input-field input[type=search] {
 	padding-left: 20px;
 	width: 210px;
+}
+
+.top-5{
+	color: darkslategray;
+	padding-bottom: 12px;
+}
+
+footer{
+	color:whitesmoke;
+	width: 100%;
+	height: 270px;
+	background-color: #111111;
+}
+
+.box-footer{
+	height: 66px;
+	background-color: #0C0C0C;
+}
+
+footer .copyright, .icon-footer{
+	margin-top: 16px;
+}
+
+.information-footer{
+	padding-top: 10px;
+}
+
+.right-icon{
+	position: absolute;
+	right: 376px;
+}
+
+.margin-date{
+	margin-top: 6px;
+}
+
+.move-sociallike{
+	padding-bottom: 20px;
+}
+
+.box-login{
+	margin-left: 90px !important; 
+	padding: 20px !important;
+	border: 2px solid #ebebeb;
+	border-radius: 3px;
+}
+
+.box-login2{
+	margin-left: 25px !important;
+	padding: 20px !important;
+	border: 2px solid #ebebeb;
+	border-radius: 3px;
+}
+
+.contact-footer{
+	padding-bottom: 10px;
+}
+
+.hrsidebar{
+	border: 2px solid #2196F3;
+	width: 50px;
 }
