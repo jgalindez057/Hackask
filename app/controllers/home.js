@@ -4,7 +4,7 @@ var getQuestions = require('../middlewares/getquestions'),
     moment = require('moment');
 
 
-var homeController = function(server) {
+module.exports = function(server) {
     console.log("Home controller Funcionando");
 
     server.route("/")
@@ -30,4 +30,3 @@ var homeController = function(server) {
 
 };
 
-module.exports = homeController;

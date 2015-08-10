@@ -1,6 +1,5 @@
 var loggedInformation = function (petic, resp, next){
 	if (petic.user) {
-		console.log(petic.user)
 			var name = petic.user.displayName
 		if (petic.user.provider == 'facebook') {
 				var url_foto = petic.user.url_foto;

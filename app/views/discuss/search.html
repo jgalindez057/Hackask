@@ -64,7 +64,7 @@
                             <div class="one-coment">
                                 <div class="row">
                                     <div class="col s1">
-                                        <img class="circle img img-s" src="{{question.user.url_foto}}" height="50px" width="50px" alt="">
+                                        <img class="circle img img-s" src="{{user.url_foto}}" height="50px" width="50px" alt="">
                                     </div>
                                     <div class="col s11">
                                         <div class="display-coments">
@@ -73,8 +73,8 @@
                                                 <p class="with-text">{{question.content | safe}}</p>
                                             </div><br>
                                             <address>
-                                                <a href="#">{{question.user.displayName}} </a> in
-                                                <a href="category/{{question.category.slug}}">{{question.category.nameCategory}}</a> {{moment(question.created).locale("es").fromNow()}}
+                                                <a href="#">{{user.displayName}} </a> in
+                                                <a href="category/{{question.category.slug}}">{{question.category}}</a> {{moment(question.created).locale("es").fromNow()}}
                                                 <a class="right-icon" href="#"><i class="material-icons">comment</i>
                                                     <small>{{question.answers.length}}</small>
                                                 </a>
@@ -83,16 +83,16 @@
                                     </div>
                                 </div>
                             </div>
-                        {% endfor %}
+                    {% endfor %}
                         <br/>
                     </div>
                     <div class="col s3"><br>
                         <article>
                             <h5><b>Buscar </b><i class="material-icons icon-search">search</i></h5>
                             <hr class="hrsidebar left"> <br>
-                            <form method="post" action="/search">
+                            <form>
                                 <div class="input-field">
-                                    <input name="search" type="search" placeholder="Escribe la palabra clave" required>
+                                    <input id="search" type="search" placeholder="Escribe la palabra clave" required>
                                 </div>
                             </form>
                         </article>
