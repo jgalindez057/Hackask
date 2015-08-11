@@ -7,6 +7,8 @@ var express = require('express'),
  bodyParser = require('body-parser'),
  globule = require('globule'),
  path = require('path'),
+ User = require('./app/models/user'),
+ flash = require('connect-flash'),
  rootPath = path.normalize(__dirname + '/.');
 
 
@@ -27,6 +29,7 @@ server.use(session({
     saveUninitialized: true
 }));
 
+server.use(flash());
 
 //Configurando passport
 server.use(passport.initialize());

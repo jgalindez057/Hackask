@@ -38,7 +38,7 @@ userSchema.path('displayName').validate(function(u) {
 
 userSchema.path('password').validate(function(p) {
   return p && p.length >= 1 && p && p.length <= 25;
-}, 'Su contraseña debe tener de 1 a 8 caracteres');
+}, 'Su contraseña debe tener de 1 a 25 caracteres');
 
 var User = mongoose.model('user', userSchema);
 

@@ -16,7 +16,7 @@ var passportLocal = function (server) {
                     return done(err);
                 }
                 if (!user) {
-                    console.log('Incorrect username.')
+                    console.log('Email o Contraseña Incorrectas.')
                     return done(null, false, {
                         message: 'Incorrect username.'
                     });

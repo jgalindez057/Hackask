@@ -21,9 +21,8 @@ var passportSingup = function (server) {
                 }
                 if (user) {
                     console.log('Ya existe un usuario con ese nombre');
-                   return done(null, false, {
-                        message: 'Incorrect username.'
-                    });
+                    return done(null, false, 
+                        req.flash('message', 'Ya existe un usuario con ese nombre'));
                 } else {
                     var newUser = new User();
                         // set the user's local credentials

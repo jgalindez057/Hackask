@@ -1,5 +1,6 @@
 var Questions = require('../models/question'),
 	User = require('../models/user'),
+    async = require('async'),
 	moment = require('moment');
 
 module.exports = function(server) {
@@ -13,18 +14,17 @@ module.exports = function(server) {
     	.exec(function(err, results){
     		if (err) {
     			console.log(err)
+                return next(err);
     		};
-    		var userS = [];
-    		results.forEach(function(questions){
-    				User.findOne({ _id : questions.user}, function(err, user){
-    					userS.push(user)
-    			});
-    		});
-    		console.log(userS)
-    	resp.render('discuss/search',{
-     		questions: results,
-     		moment: moment
-     	})
+            async.map(results, function (question, callback) {
+                question.populate('user', callback);
+            }, function (err, results) {
+                resp.render('discuss/search',{
+                    questions: results,
+                    moment: moment
+                })
+            })
+    		    	
     	});
 	})
 }	
